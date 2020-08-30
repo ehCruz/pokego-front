@@ -1,0 +1,76 @@
+<div class="text-center">
+
+    <form class="form-signin">
+        <h1 class="h3 mb-3 font-weight-normal">Login PokeGo</h1>
+
+        <label for="inputEmail"></label>
+        <input [formControl]="email"
+               [ngClass]="{'is-invalid': email.invalid && (email.dirty || email.touched)}"
+               [(ngModel)]="usuario.email"
+               autocomplete="none"
+               type="email" id="inputEmail" class="form-control mb-0" placeholder="exemplo@email.com">
+        <div class="invalid-feedback mb-2" *ngIf="email.invalid && (email.dirty || email.touched)">
+            <label *ngIf="email.hasError('required')" style="float: left;">
+                E-mail é obrigatório!
+            </label>
+            <label *ngIf="email.hasError('email')" style="float: left;">
+                Formato de e-mail inválido!
+            </label>
+            <label *ngIf="email.hasError('erroCadastro')" style="float: left;">
+                {{email.errors.erroCadastro.message}}
+            </label>
+        </div>
+
+        <label for="inputCpf"></label>
+        <input [formControl]="cpf"
+               [ngClass]="{'is-invalid': cpf.invalid && (cpf.dirty || cpf.touched)}"
+               mask="000.000.000-00"
+               [(ngModel)]="usuario.cpf"
+               autocomplete="none"
+               type="text" id="inputCpf" class="form-control mb-2" placeholder="999.999.999-99">
+        <div class="invalid-feedback mb-2" *ngIf="cpf.invalid && (cpf.dirty || cpf.touched)">
+            <label *ngIf="cpf.hasError('required')" style="float: left;">
+                CPF é obrigatório!
+            </label>
+            <label *ngIf="cpf.invalid && !cpf.errors.required && !cpf.errors.errorLogin" style="float: left;">
+                Informe o CPF por completo!
+            </label>
+            <label *ngIf="cpf.errors.errorLogin" style="float: left;">
+                {{cpf.errors.errorLogin.message}}
+            </label>
+        </div>
+
+        <button class="btn btn-lg btn-primary btn-block"
+                [disabled]="usuarioLogin.invalid"
+                (click)="logar()">Entrar</button>
+    </form>
+    ou <a [routerLink]="'/usuario-info/novo'">cadastre-se aqui!</a>
+    <div>
+        <div class="alert alert-danger" role="alert">
+            Necessário dois click no botão "Entrar" - resolução de bug em andamento(mas a tempo da entrega ;-;)
+        </div>
+    </div>
+</div>
+
+
+<ng-container *ngIf="showErrorModal">
+    <div class="bg-modal"></div>
+    <div class="modal" tabindex="-1" role="dialog" style="display: block!important;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Atenção!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                            (click)="showErrorModal = !showErrorModal">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>{{errorMessage}}</p>
+                    <br>
+                    <a routerLink="/usuario-info/novo">Cadastrar-se!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>

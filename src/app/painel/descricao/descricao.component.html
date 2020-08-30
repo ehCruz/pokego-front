@@ -1,0 +1,43 @@
+<div class="row mt-5">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-img-top">
+                <img src="{{this.description.imgUrl}}" style="width: 100%">
+            </div>
+
+            <div class="card-body" style="background-color: rgba(0, 0, 0, 0.1);">
+                <h5 class="card-title">{{this.description.name}}</h5>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="card">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <div>
+                        <p><strong>Habilidades</strong></p>
+                        <ul>
+                            <li *ngFor="let habilidades of description.abilities">
+                                {{habilidades.name}}
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div>
+                        <p><strong>Movimentos</strong></p>
+                        <ul>
+                            <li *ngFor="let movimentos of description.moves">
+                                {{movimentos.name}}
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+            <div class="card-body">
+                <a class="card-link" (click)="voltar()"><< Voltar</a>
+                <a href="{{description.url}}" target="_blank" class="card-link">Fonte</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,10 @@
+.form-pesquisa {
+    display: flex;
+    align-items: center;
+}
+
+.form-pesquisa button {
+    width: 115px;
+    padding: 3px;
+    margin-left: 15px;
+}

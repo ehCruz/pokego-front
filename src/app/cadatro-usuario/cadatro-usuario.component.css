@@ -1,0 +1,21 @@
+.form-cadastro {
+    width: 100%;
+}
+
+.bg-modal {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    background-color: #000;
+    opacity: .4;
+}
+
+.link-voltar {
+    cursor: pointer;
+    color: #007bff;
+}
+
+.link-voltar:hover {
+    text-decoration: underline;
+}

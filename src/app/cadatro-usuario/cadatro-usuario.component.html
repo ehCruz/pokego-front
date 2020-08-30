@@ -1,0 +1,131 @@
+<header>
+    <div class="navbar navbar-dark bg-dark box-shadow">
+        <div class="container d-flex justify-content-center">
+            <a href="#" class="navbar-brand d-flex align-items-center">
+                <strong>PokeGo</strong>
+            </a>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="form-cadastro mt-5 mb-5">
+                <h4 class="heading mb-3">{{titulo}}</h4>
+                <div class="form">
+                    <form>
+
+                        <label for="inputNome">Nome</label>
+                        <input [formControl]="nome"
+                               [ngClass]="{'is-invalid': nome.invalid && (nome.dirty || nome.touched)}"
+                               [(ngModel)]="usuario.nome"
+                               type="text" id="inputNome" class="form-control mb-3" placeholder="João da Silva">
+                        <div class="invalid-feedback mb-2" *ngIf="nome.invalid && (nome.dirty || nome.touched)">
+                            <label *ngIf="nome.hasError('required')">
+                                Nome é obrigatório!
+                            </label>
+                            <label *ngIf="nome.hasError('minLength')">
+                                Nome deve conter ao menos 3 caractéres!
+                            </label>
+                            <label *ngIf="nome.hasError('nomeInvalido') && !nome.hasError('required')">
+                                Nome é inválido.
+                            </label>
+                            <label *ngIf="nome.hasError('erroCadastro')">
+                                {{nome.errors.erroCadastro}}
+                            </label>
+                        </div>
+
+                        <label for="inputEmail">Email</label>
+                        <input [formControl]="email"
+                               [ngClass]="{'is-invalid': email.invalid && (email.dirty || email.touched)}"
+                               [(ngModel)]="usuario.email"
+                               type="email" id="inputEmail" class="form-control mb-3" placeholder="exemplo@email.com">
+                        <div class="invalid-feedback mb-2" *ngIf="email.invalid && (email.dirty || email.touched)">
+                            <label *ngIf="email.hasError('required')">
+                                E-mail é obrigatório!
+                            </label>
+                            <label *ngIf="email.hasError('email')">
+                                Formato de e-mail inválido!
+                            </label>
+                            <label *ngIf="email.hasError('erroCadastro')">
+                                {{email.errors.erroCadastro.message}}
+                            </label>
+                        </div>
+
+                        <label for="inputCpf">CPF</label>
+                        <input [formControl]="cpf"
+                               [ngClass]="{'is-invalid': cpf.invalid && (cpf.dirty || cpf.touched)}"
+                               mask="000.000.000-00"
+                               [(ngModel)]="usuario.cpf"
+                               type="text" id="inputCpf" class="form-control mb-3" placeholder="999.999.999-99">
+                        <div class="invalid-feedback mb-2" *ngIf="cpf.invalid && (cpf.dirty || cpf.touched)">
+                            <label *ngIf="cpf.hasError('required')">
+                                CPF é obrigatório!
+                            </label>
+                            <label *ngIf="cpf.invalid && !cpf.errors.required && !cpf.errors.errorCadastro">
+                                Informe o CPF por completo!
+                            </label>
+                            <label *ngIf="cpf.errors.errorCadastro">
+                                {{cpf.errors.errorCadastro.message}}
+                            </label>
+                        </div>
+
+                        <label for="inputTelefone">Telefone</label>
+                        <input [formControl]="telefone"
+                               [ngClass]="{'is-invalid': telefone.invalid && (telefone.dirty || telefone.touched)}"
+                               mask="(00) 00000-0000"
+                               [(ngModel)]="usuario.telefone"
+                               type="text" id="inputTelefone" class="form-control mb-3" placeholder="(41) 99999-1234">
+                        <div class="invalid-feedback mb-2"
+                             *ngIf="telefone.invalid && (telefone.dirty || telefone.touched)">
+                            <label *ngIf="telefone.hasError('required')">
+                                Telefone é obrigatório!
+                            </label>
+                            <label *ngIf="telefone.invalid && !telefone.errors.required">
+                                Informe o telefone completo!
+                            </label>
+                            <label *ngIf="telefone.hasError('erroCadastro')">
+                                {{telefone.errors.erroCadastro.message}}
+                            </label>
+                        </div>
+                        <ng-container *ngIf="!isAtualizar; else atualizar">
+                            <button class="btn btn-lg btn-primary float-right mt-5"
+                                    [disabled]="usuarioForm.invalid"
+                                    (click)="cadastrarNovoUsuario()">Cadastrar
+                            </button>
+                        </ng-container>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-container *ngIf="showErrorModal">
+    <div class="bg-modal"></div>
+    <div class="modal" tabindex="-1" role="dialog" style="display: block!important;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Atenção!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                            (click)="showErrorModal = !showErrorModal">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>{{errorMessage}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+<ng-template #atualizar>
+    <p class="float-left mt-5 link-voltar" (click)="voltar()"><< Voltar</p>
+    <button class="btn btn-lg btn-primary float-right mt-5"
+            [disabled]="usuarioForm.invalid"
+            (click)="atualizarDadosUsuario()">Atualizar
+    </button>
+</ng-template>

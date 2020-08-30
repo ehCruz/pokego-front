@@ -1,0 +1,49 @@
+.nav-link {
+    font-size: .9em;
+}
+
+.nav-info {
+    color: #ffffff;
+}
+
+p.navbar-brand {
+    margin: 0 15px 0 0;
+    font-size: 1em;
+}
+
+a.navbar-brand {
+    margin: 0 0 0 15px;
+}
+
+ul.navbar-nav {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+@media (min-width: 991px) {
+    .navagation .navbar-collapse {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .display-web {
+        display: block;
+    }
+    .display-mobile {
+        display: none!important;
+    }
+}
+
+@media (max-width: 990px) {
+    .navagation .navbar-brand {
+        margin-top: 25px;
+    }
+    .display-web {
+        display: none!important;
+    }
+    .display-mobile {
+        display: flex!important;
+        margin: 0!important;
+    }
+}
